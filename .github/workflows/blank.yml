@@ -7,6 +7,8 @@ jobs:
       - name: run fetch details
         uses: actions/checkout@v3
       - name: ansible
-        run: sudo apt update && sudo apt install -y ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
       - name: run cmd
         run: ansible-playbook -i inventory.ini Ansible1.yml
