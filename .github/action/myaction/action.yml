@@ -1,0 +1,11 @@
+name: new_action
+description: testing purpose
+runs:
+  using: composite
+  steps:
+    - name: first composite
+      run: echo "first composite"
+      shell: bash
+    - name: second
+      run: echo "second"
+      shell: bash
