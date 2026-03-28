@@ -14,7 +14,7 @@ jobs:
         id: ansible-run
         run: ansible-playbook -i inventory.ini Ansible1.yml >> $GITHUB_OUTPUT
       - name: upload artifacts
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
       - name: output
         run: echo ${{ steps.ansible-run.outputs.log }}
         
