@@ -1,6 +1,8 @@
 name: Ansible
 on: workflow_dispatch
 jobs:
+  recall:
+    uses: ./.github/workflows/new.yml
   ok:
     runs-on: ubuntu-latest
     container: 
@@ -10,6 +12,5 @@ jobs:
         uses: actions/checkout@v3
       - name: run action
         uses: ./.github/actions/myactions
-      - name: run workflow
-        uses: ./.github/workflows/new.yml
+
      
