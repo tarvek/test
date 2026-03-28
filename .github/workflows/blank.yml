@@ -6,5 +6,7 @@ jobs:
     steps:
       - name: run fetch details
         uses: actions/checkout@v3
+      - name: ansible
+        run: apt install -y ansible
       - name: run cmd
-        run: ansible-playbook -i inventory.ini ansible1.yml
+        run: ansible-playbook -i inventory.ini Ansible1.yml
