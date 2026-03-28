@@ -1,0 +1,22 @@
+name: test
+on: workflow_dispatch
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run fetch details
+        uses: actions/checkout@v3
+      - name: ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+      - name: run cmd
+        id: ansible-run
+        run: ansible-playbook -i inventory.ini Ansible1.yml >> $GITHUB_OUTPUT
+      - name: upload artifacts
+        uses: actions/upload-artifacts@v3
+      - name: output
+        run: echo ${{ steps.ansible-run.outputs.log }}
+        
+    
+    
