@@ -7,4 +7,4 @@ jobs:
       - name: run fetch details
         uses: actions/checkout@v3
       - name: run cmd
-        shell: ansible-playbook -i inventory.ini ansible1.yml
+        run: ansible-playbook -i inventory.ini ansible1.yml
