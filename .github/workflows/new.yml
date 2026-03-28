@@ -1,0 +1,8 @@
+name: new_recall
+on: workflow_call
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: recalling
+        run: echo "recalled"
