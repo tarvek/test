@@ -13,10 +13,13 @@ jobs:
       - name: run cmd
         id: ansible-run
         run: |
-          ansible-playbook -i inventory.ini Ansible1.yml
+          ansible-playbook -i inventory.ini Ansible1.yml | tee ansible.log
           echo "status=success" >> $GITHUB_OUTPUT
       - name: upload artifacts
         uses: actions/upload-artifact@v4
+        with:
+          name: ansible output
+          path: ansible.log
       - name: output
         run: echo ${{ steps.ansible-run.outputs.status }}
         
