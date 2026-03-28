@@ -1,0 +1,7 @@
+---
+- name: Yes
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: echo
+      cmd: echo "its working"
