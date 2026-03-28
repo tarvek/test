@@ -1,15 +1,24 @@
 name: test
 on: workflow_dispatch
+env:
+  ENVIRONMENT: test
+  name: ${{secrets.name}}
 jobs:
   execute:
     runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.ansible-run.outputs.status }}
+    container: 
+      image: quay.io/ansible/ansible-runner:latest
     steps:
       - name: run fetch details
         uses: actions/checkout@v3
-      - name: ansible
-        run: |
-          sudo apt update
-          sudo apt install -y ansible
+      
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.ansible/collections
+          key: ansible-${{ hashFiles('**/requirements.yml') }}          
       - name: run cmd
         id: ansible-run
         run: |
@@ -20,8 +29,28 @@ jobs:
         with:
           name: ansible output
           path: ansible.log
+  output:
+    needs: execute
+    runs-on: ubuntu-latest
+    container: 
+      image: quay.io/ansible/ansible-runner:latest
+    steps:
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.ansible/collections
+          key: ansible-${{ hashFiles('**/requirements.yml') }}   
+      - name: download artifact
+        if: needs.execute.outputs.status == 'success'
+        uses: actions/download-artifact@v4
       - name: output
-        run: echo ${{ steps.ansible-run.outputs.status }}
+        run: echo ${{ env.ENVIRONMENT }}
+      - name: ls
+        continue-on-error: true
+        run: ls
+      - name: outcome
+        run: echo ${{env.name}}
+    
         
     
     
