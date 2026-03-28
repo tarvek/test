@@ -13,7 +13,7 @@ jobs:
       - name: run cmd
         id: ansible-run
         run: |
-          ansible-playbook -i inventory.ini Ansible1.yml >> $GITHUB_OUTPUT
+          ansible-playbook -i inventory.ini Ansible1.yml
           echo "status=success" >> $GITHUB_OUTPUT
       - name: upload artifacts
         uses: actions/upload-artifact@v4
