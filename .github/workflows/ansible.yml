@@ -6,6 +6,8 @@ jobs:
     container: 
       image: quay.io/ansible/ansible-runner:latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: run action
         uses: ./.github/actions/myactions
       - name: run workflow
