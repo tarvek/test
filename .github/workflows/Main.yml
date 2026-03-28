@@ -1,4 +1,4 @@
-name: test
+name: major
 on: workflow_dispatch
 env:
   ENVIRONMENT: test
